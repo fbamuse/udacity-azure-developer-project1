@@ -15,40 +15,35 @@ steps:
       curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
       sudo apt-get update 
       sudo apt-get install mssql-tools unixodbc-dev
+
+
 - task: TerraformInstaller@0
   inputs:
     terraformVersion: '0.14.9'
-- task: TerraformCLI@0
+- task: TerraformTaskV1@0
   inputs:
+    provider: 'azurerm'
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
-    backendType: 'azurerm'
-    backendServiceArm: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
+    backendServiceArm: '従量課金(1)(121a3543-1cf4-4852-8b13-d230af5db949)'
     backendAzureRmResourceGroupName: 'tstate'
     backendAzureRmStorageAccountName: 'tstate210319'
     backendAzureRmContainerName: 'azuredevproject1'
     backendAzureRmKey: 'terraform.tfstate'
-    allowTelemetryCollection: true
-
-- task: TerraformCLI@0
+- task: TerraformTaskV1@0
   inputs:
+    provider: 'azurerm'
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
-    environmentServiceName: '従量課金(2)(121a3543-1cf4-4852-8b13-d230af5db949)'
-    allowTelemetryCollection: true
+    environmentServiceNameAzureRM: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
 
-- task: TerraformCLI@0
+- task: TerraformTaskV1@0
   inputs:
+    provider: 'azurerm'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
-    environmentServiceName: '従量課金(3)(121a3543-1cf4-4852-8b13-d230af5db949)'
-    allowTelemetryCollection: true
+    environmentServiceNameAzureRM: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
 
-- task: TerraformCLI@0
-  inputs:
-    command: 'output'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
-    allowTelemetryCollection: true
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/deploy'
