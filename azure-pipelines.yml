@@ -17,17 +17,6 @@ steps:
       sudo apt-get install mssql-tools unixodbc-dev
 
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 
-      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/users-table-init.sql"
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 
-      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/posts-table-init.sql"
-      
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
@@ -91,4 +80,10 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/posts-table-init.sql"'
+    script: 
+      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/users-table-init.sql"
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 
+      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/posts-table-init.sql"
