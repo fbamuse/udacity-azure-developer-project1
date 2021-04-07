@@ -19,6 +19,7 @@ steps:
 - task: TerraformInstaller@0
   inputs:
     terraformVersion: '0.14.9'
+  
 - task: TerraformCLI@0
   inputs:
     command: 'init'
