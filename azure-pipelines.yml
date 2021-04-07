@@ -34,11 +34,23 @@ steps:
 - task: TerraformCLI@0
   inputs:
     command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
     environmentServiceName: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
     allowTelemetryCollection: true
 
+- task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
+    environmentServiceName: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
+    allowTelemetryCollection: true
 
-
+- task: TerraformCLI@0
+  inputs:
+    command: 'output'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
+    allowTelemetryCollection: true
+container:
 
 - task: ArchiveFiles@2
   inputs:
