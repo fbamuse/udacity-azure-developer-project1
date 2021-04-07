@@ -21,10 +21,9 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
-
 - task: TerraformInstaller@0
   inputs:
-    terraformVersion: 'latest'
+    terraformVersion: '0.12.3'
 #- task: TerraformInstaller@0
 #  inputs:
 #    terraformVersion: '0.14.9'
