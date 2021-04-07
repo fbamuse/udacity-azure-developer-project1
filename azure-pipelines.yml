@@ -1,0 +1,94 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: |
+      curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+      curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+      sudo apt-get update 
+      sudo apt-get install mssql-tools unixodbc-dev
+
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 
+      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/users-table-init.sql"
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 
+      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/posts-table-init.sql"
+      
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+
+
+- task: TerraformInstaller@0
+  inputs:
+    terraformVersion: '0.14.9'
+- task: TerraformTaskV1@0
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
+    backendServiceArm: '従量課金(1)(121a3543-1cf4-4852-8b13-d230af5db949)'
+    backendAzureRmResourceGroupName: 'tstate'
+    backendAzureRmStorageAccountName: 'tstate210319'
+    backendAzureRmContainerName: 'azuredevproject1'
+    backendAzureRmKey: 'terraform.tfstate'
+- task: TerraformTaskV1@0
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
+    environmentServiceNameAzureRM: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
+
+- task: TerraformTaskV1@0
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
+    environmentServiceNameAzureRM: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
+
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/deploy'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+    verbose: true
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    ArtifactName: 'drop'
+
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
+    appType: 'webApp'
+    appName: 'appbamuse'
+    deployToSlotOrASE: true
+    resourceGroupName: 'udarg'
+    slotName: 'production'
+    package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    deploymentMethod: 'zipDeploy'
+
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/posts-table-init.sql"'

@@ -1,0 +1,11 @@
+az webapp up --resource-group rg01 --name appbamuse --sku F1 --verbose
+
+az storage account create --name scbamuse --resource-group rg01 --location westus2
+az storage container create --account-name scbamuse --name images --auth-mode login --public-access container
+
+
+
+az sql server create --admin-user bamuse --admin-password !fuku11MASA --name svrbamuse --resource-group rg01 --location westus2 --enable-public-network true --verbose
+az sql server firewall-rule create -g rg01 -s svrbamuse -n azureaccess --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0 --verbose
+az sql db create --name dbbamuse --resource-group rg01 --server svrbamuse --tier Basic --verbose
+
