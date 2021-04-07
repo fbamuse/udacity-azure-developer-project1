@@ -50,7 +50,7 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
     environmentServiceNameAzureRM: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
 
-container:- bash: |
+- bash: |
     KEY=$(cat $(TerraformOutputs.jsonOutputVariablesPath) | jq '.account_key.value' -r)
     echo "##vso[task.setvariable variable=Outputs.account_key]$KEY"
 
