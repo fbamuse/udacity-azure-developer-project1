@@ -50,7 +50,7 @@ steps:
     command: 'output'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
     allowTelemetryCollection: true
-container:
+
 
 - task: ArchiveFiles@2
   inputs:
