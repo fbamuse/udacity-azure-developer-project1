@@ -16,17 +16,9 @@ steps:
       sudo apt-get update 
       sudo apt-get install mssql-tools unixodbc-dev
 
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
 - task: TerraformInstaller@0
   inputs:
-    terraformVersion: '0.12.3'
-#- task: TerraformInstaller@0
-#  inputs:
-#    terraformVersion: '0.14.9'
+    terraformVersion: '0.14.9'
 - task: TerraformCLI@0
   inputs:
     command: 'init'
