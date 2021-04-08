@@ -4,22 +4,11 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+- del
 
 pool:
   vmImage: ubuntu-latest
 
-variables:
-- group: group1
-- name: a
-  value: '111'
-
-steps:
-- script: |
-      curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-      curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
-      sudo apt-get update 
-      sudo apt-get install mssql-tools unixodbc-dev
 
 - task: TerraformInstaller@0
   inputs:
@@ -38,64 +27,7 @@ steps:
 
 - task: TerraformCLI@0
   inputs:
-    command: 'plan'
+    command: 'destory'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
     environmentServiceName: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
     allowTelemetryCollection: true
-
-- task: TerraformCLI@0
-  inputs:
-    command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
-    environmentServiceName: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
-    allowTelemetryCollection: true
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      account_key=`terraform output -raw account_key`
-      echo ${account_key}
-      echo "##vso[task.setvariable variable=account_key]$account_key"
-      echo "$account_key"
-
-    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
-
-
-
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/deploy'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
-    verbose: true
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    ArtifactName: 'drop'
-
-
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
-    appType: 'webApp'
-    appName: 'appbamuse'
-    deployToSlotOrASE: true
-    resourceGroupName: 'udarg'
-    slotName: 'production'
-    package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    appSettings: '-BLOB_STORAGE_KEY  $(account_key)'
-    deploymentMethod: 'zipDeploy'
-
-
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 
-      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/users-table-init.sql"
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 
-      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/posts-table-init.sql"
