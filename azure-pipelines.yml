@@ -91,7 +91,7 @@ steps:
     resourceGroupName: 'udarg'
     slotName: 'production'
     package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    appSettings: '-BLOB_STORAGE_KEY $account_key'
+    appSettings: '-BLOB_STORAGE_KEY "$account_key"'
     deploymentMethod: 'zipDeploy'
 
 
