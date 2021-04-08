@@ -18,6 +18,7 @@ steps:
 
 - script: |
         echo $(SQL_PASSWORD)
+        echo $(a)
 
 - script: |
       curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
