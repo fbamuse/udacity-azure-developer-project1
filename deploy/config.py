@@ -7,7 +7,7 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'secret-key'
 
     BLOB_ACCOUNT = os.environ.get('BLOB_ACCOUNT') or 'scbamuse'
-    BLOB_STORAGE_KEY = os.environ.get('BLOB_STORAGE_KEY') or '9Sxnw1mZih2gYY4OmnUHiz73F6Qgc+0wlq5+vPoR9xfGAgIhoE158/WC4HLL3rn9mUBm6+rWVfORikcBEYCz2Q=='
+    BLOB_STORAGE_KEY = os.environ.get('BLOB_STORAGE_KEY') 
     BLOB_CONTAINER = os.environ.get('BLOB_CONTAINER') or 'images'
 
     SQL_SERVER = os.environ.get('SQL_SERVER') or 'svrbamuse.database.windows.net'
