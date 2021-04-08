@@ -27,7 +27,7 @@ steps:
 
 - task: TerraformCLI@0
   inputs:
-    command: 'destory'
+    command: 'destroy'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
     environmentServiceName: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
     allowTelemetryCollection: true
