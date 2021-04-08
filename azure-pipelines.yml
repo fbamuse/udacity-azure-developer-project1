@@ -53,7 +53,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      val='terraform output`
+      val=`terraform output`
       echo ${val}
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
 
