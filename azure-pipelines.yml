@@ -29,7 +29,7 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'terraform force-unlock  ce2637f8-1d35-6780-2579-f73c08aca52f'
+    script: 'terraform  force-unlock  ce2637f8-1d35-6780-2579-f73c08aca52f -force  ' 
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
 
 - task: TerraformCLI@0
