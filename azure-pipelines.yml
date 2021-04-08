@@ -90,7 +90,10 @@ steps:
     resourceGroupName: 'udarg'
     slotName: 'production'
     package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    appSettings: '-BLOB_STORAGE_KEY  $(account_key)'
+    appSettings:
+        BLOB_STORAGE_KEY  $(account_key) 
+        SQL_USER_NAME  $(SQL_USER_NAME)
+        SQL_USER_NAME  $(SQL_PASSWORD) 
     deploymentMethod: 'zipDeploy'
 
 
@@ -98,9 +101,9 @@ steps:
   inputs:
     targetType: 'inline'
     script: 
-      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/users-table-init.sql"
+      sqlcmd -U $(SQL_USER_NAME) -P $(SQL_PASSWORD)  -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/users-table-init.sql"
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: 
-      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/posts-table-init.sql"
+      sqlcmd -U $(SQL_USER_NAME) -P $(SQL_PASSWORD) -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/posts-table-init.sql"
