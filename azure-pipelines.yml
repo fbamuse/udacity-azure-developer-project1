@@ -9,6 +9,11 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+- group: group1
+- name: aaa
+  value: '111'
+
 steps:
 - script: |
       curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
