@@ -53,8 +53,11 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      val=`terraform output`
-      echo ${val}
+      account_key=`terraform output -raw account_key`
+      echo ${account_key}
+      echo "##vso[task.setvariable variable=account_key]$account_key"
+      echo "$account_key"
+
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
 
 #- task: TerraformCLI@0
