@@ -49,6 +49,7 @@ steps:
   inputs:
     command: 'output'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
+    commandOptions: '-raw account_key'
     allowTelemetryCollection: true
 
 
