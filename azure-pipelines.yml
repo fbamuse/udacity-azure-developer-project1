@@ -60,12 +60,6 @@ steps:
 
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
 
-#- task: TerraformCLI@0
-#  inputs:
-#    command: 'output'
-#    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
-#  
-#    allowTelemetryCollection: true
 
 
 - task: ArchiveFiles@2
