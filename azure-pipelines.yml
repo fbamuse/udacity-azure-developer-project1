@@ -16,50 +16,41 @@ steps:
       sudo apt-get update 
       sudo apt-get install mssql-tools unixodbc-dev
 
-
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 
-      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/users-table-init.sql"
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 
-      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/posts-table-init.sql"
-      
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
-
 - task: TerraformInstaller@0
   inputs:
     terraformVersion: '0.14.9'
-- task: TerraformTaskV1@0
+- task: TerraformCLI@0
   inputs:
-    provider: 'azurerm'
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
-    backendServiceArm: '従量課金(1)(121a3543-1cf4-4852-8b13-d230af5db949)'
+    backendType: 'azurerm'
+    backendServiceArm: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
     backendAzureRmResourceGroupName: 'tstate'
     backendAzureRmStorageAccountName: 'tstate210319'
     backendAzureRmContainerName: 'azuredevproject1'
     backendAzureRmKey: 'terraform.tfstate'
-- task: TerraformTaskV1@0
+    allowTelemetryCollection: true
+
+- task: TerraformCLI@0
   inputs:
-    provider: 'azurerm'
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
-    environmentServiceNameAzureRM: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
+    environmentServiceName: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
+    allowTelemetryCollection: true
 
-- task: TerraformTaskV1@0
+- task: TerraformCLI@0
   inputs:
-    provider: 'azurerm'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
-    environmentServiceNameAzureRM: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
+    environmentServiceName: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
+    allowTelemetryCollection: true
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'output'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
+    commandOptions: '-raw account_key'
+    allowTelemetryCollection: true
 
 
 - task: ArchiveFiles@2
@@ -91,4 +82,10 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/posts-table-init.sql"'
+    script: 
+      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/users-table-init.sql"
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 
+      sqlcmd -U "bamuse" -P "!fuku11MASA" -S "svrbamuse.database.windows.net" -d "dbbamuse" -i "$(System.DefaultWorkingDirectory)/sql_scripts/posts-table-init.sql"
