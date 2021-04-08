@@ -11,7 +11,7 @@ pool:
 
 variables:
 - group: group1
-- name: aaa
+- name: a
   value: '111'
 
 steps:
