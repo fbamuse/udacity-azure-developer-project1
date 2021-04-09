@@ -1,11 +1,11 @@
 data "azurerm_storage_account" "example" {
-  name                = "${saname}"
-  resource_group_name = "${resource_group}"
+  name                = "${var.saname}"
+  resource_group_name = "${var.resource_group}"
 }
 
 data "azurerm_app_service" "example" {
-  name                = "${app_service}" 
-  resource_group_name = "${resource_group}"
+  name                = "${var.app_service}" 
+  resource_group_name = "${var.resource_group}"
 }
 
 
