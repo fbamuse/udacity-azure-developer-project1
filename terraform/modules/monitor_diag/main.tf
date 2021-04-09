@@ -17,11 +17,12 @@ resource "azurerm_monitor_diagnostic_setting" "example" {
 
 
   log {
-    category = "AuditEvent"
-    enabled  = false
+    category = "AppServiceAppLogs"
+    enabled  = true
 
     retention_policy {
-      enabled = false
+      days =2
+      enabled = true
     }
   }
 
