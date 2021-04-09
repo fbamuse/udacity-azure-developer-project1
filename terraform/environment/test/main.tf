@@ -41,3 +41,10 @@ module "sqlserver" {
   sqldbname           =  "${var.sqldbname}" 
   sqlsvrname           =  "${var.sqlsvrname}" 
 }
+module "monitor_diag" {
+  source           = "../../modules/monitor_diag"
+  location         = "${var.location}"
+  resource_group   = "${module.resource_group.resource_group_name}"
+  app_service          =  "${var.app_service}" 
+  saname           =  "${var.saname}" 
+}

@@ -12,7 +12,7 @@ saname="scbamuse"
 cname="images"
 sqlsvrname="svrbamuse"
 sqldbname="dbbamuse"
-
+app_service="appbamuse"
 
 
 

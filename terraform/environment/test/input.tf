@@ -15,4 +15,4 @@ variable saname {}
 variable cname {}
 variable sqldbname {}
 variable sqlsvrname {}
-
+variable app_service{}

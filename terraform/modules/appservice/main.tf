@@ -12,7 +12,7 @@ resource "azurerm_app_service_plan" "test" {
 }
 
 resource "azurerm_app_service" "test" {
-  name                = "appbamuse"
+  name                = "${var.app_service}" 
   location            = "${var.location}"
   resource_group_name = "${var.resource_group}"
   app_service_plan_id = azurerm_app_service_plan.test.id
