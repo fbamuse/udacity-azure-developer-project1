@@ -25,6 +25,7 @@ module "appservice" {
   application_type = "${var.application_type}"
   resource_type    = "AppService"
   resource_group   = "${module.resource_group.resource_group_name}"
+  app_service      = "${var.app_service}"
 }
 
 module "storageaccount" {
