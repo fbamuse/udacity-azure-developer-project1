@@ -31,20 +31,19 @@ module "storageaccount" {
   source           = "../../modules/storageaccount"
   location         = "${var.location}"
   resource_group   = "${module.resource_group.resource_group_name}"
-  saname           =  "${var.saname}" 
-  cname           =  "${var.cname}" 
+  saname           = "${var.saname}" 
+  cname            = "${var.cname}" 
 }
 module "sqlserver" {
   source           = "../../modules/sqlserver"
   location         = "${var.location}"
   resource_group   = "${module.resource_group.resource_group_name}"
-  sqldbname           =  "${var.sqldbname}" 
-  sqlsvrname           =  "${var.sqlsvrname}" 
+  sqldbname        = "${var.sqldbname}" 
+  sqlsvrname       = "${var.sqlsvrname}" 
 }
 module "monitor_diag" {
-  source           = "../../modules/monitor_diag"
-  location         = "${var.location}"
-  resource_group   = "${module.resource_group.resource_group_name}"
-  app_service          =  "${var.app_service}" 
+  source           =  "../../modules/monitor_diag"
+  resource_group   =  "${module.resource_group.resource_group_name}"
+  app_service      =  "${var.app_service}" 
   saname           =  "${var.saname}" 
 }
