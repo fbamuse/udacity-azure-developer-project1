@@ -11,7 +11,7 @@ data "azurerm_app_service" "example" {
 
 
 resource "azurerm_monitor_diagnostic_setting" "example" {
-  name               = "example"
+  name               = "example2"
   target_resource_id = data.azurerm_app_service.example.id
   storage_account_id = data.azurerm_storage_account.example.id
 
