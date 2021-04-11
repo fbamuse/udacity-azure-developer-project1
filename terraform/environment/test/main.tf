@@ -48,6 +48,6 @@ module "monitor_diag" {
   app_service      =  "${var.app_service}" 
   saname           =  "${var.saname}" 
   depends_on = [
-    module.storageaccount]
+    module.storageaccount
   ]
 }
