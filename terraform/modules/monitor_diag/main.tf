@@ -21,7 +21,7 @@ resource "azurerm_monitor_diagnostic_setting" "example" {
     enabled  = true
 
     retention_policy {
-      days =2
+      days =4
       enabled = true
     }
   }
