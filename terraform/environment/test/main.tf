@@ -47,5 +47,7 @@ module "monitor_diag" {
   resource_group   =  "${module.resource_group.resource_group_name}"
   app_service      =  "${var.app_service}" 
   saname           =  "${var.saname}" 
-
+  depends_on = [
+    azurerm_storage_account.test
+  ]
 }
