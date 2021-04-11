@@ -6,23 +6,15 @@
 - *Analyze costs, scalability, availability, and workflow*
 - *Choose the appropriate solution (VM or App Service) for deploying the app*
 - *Justify your choice*
+- 
+The system utilization rate and load cannot be predicted. First, select Appservice, which enables easy deployment, high availability, and flexible configuration changes.
 
-コスト
+VMs have fixed server and storage resources, making it easy to estimate prices.
+On the other hand, it is necessary to prepare security patches, implementation of monitoring functions, and load balancer by yourself. It is necessary to consider the operating cost.
 
-VMはサーバ、ストレージのリソースが固定され、価格が見積もりやすい
-セキュリティパッチや監視帰納の実装、
-スケールアウトではロードバランサーコスト、運用負荷
-高可用性対応など管理コストを考慮
 
-Appserviceは価格ロードバランサー、すけ
-
-、レポジトリとの連携、モニタリング機能との統合、ディプロイスロットによりABテスト、スワップ、ブルーグリーン、ABテストが容易などがあり、アプリケーションのライフサイクルを意識したCICDを前提にしたサービスが提供される。
-加えて、フルマネージでメンテの手間が省けて開発に集中できる。
-
-スケールアップ、ダウン、スケールアウト、インが無停止、
-ラインタイムのアップグレードが無停止
-
-プランによって占有
+Appservice is Paas that realizes scalability and high availability. If the utilization rate is high, the cost may be higher than that of VM,
+Scale-up, down, scale-out, and in can be performed non-stop, and canary release, blue-green deploy, and AB testing can be easily performed by linking with the repository, monitoring function, and deploy slot. Services based on CICD that are conscious of the application life cycle are provided. There is no need to consider the operational burden.
 
 
 
@@ -30,5 +22,4 @@ Appserviceは価格ロードバランサー、すけ
 
 *Detail how the app and any other needs would have to change for you to change your decision in the last section.* 
 
-
-運用、負荷など使われ方が定常的に落着き、必要なリソースが見積が可能になり、Appserciceに比べてIaas構成の方が、運用コスト含めて優位な場合に、VM構成に変更を判断する。
+When the usage such as operation and load is constantly settled, the required resources can be estimated, and the Iaas configuration is superior to the Appsercice, including the operation cost, it is decided to change to the VM configuration. I don't need it.
