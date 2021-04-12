@@ -67,8 +67,9 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
             app.logger.info('Invalid username or password.')
+            flash('Invalid username or password')
+
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
@@ -84,7 +85,7 @@ def authorized():
     if request.args.get('state') != session.get("state"):
         return redirect(url_for("home"))  # No-OP. Goes back to Index page
     if "error" in request.args:  # Authentication/Authorization failure
-        app.logger.warning('Authorization failure.')
+        app.logger.info('Authorization failure.')
         return render_template("auth_error.html", result=request.args)
     if request.args.get('code'):
         cache = _load_cache()
@@ -95,7 +96,7 @@ def authorized():
         # TODO: Acquire a token from a built msal app, along with the appropriate redirect URI
         #result = None
         if "error" in result:
-            app.logger.warning('Authorization failure auth_error.html.')
+            app.logger.info('Authorization failure auth_error.html.')
             return render_template("auth_error.html", result=result)
 
         session["user"] = result.get("id_token_claims")
