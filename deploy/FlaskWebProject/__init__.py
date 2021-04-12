@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 app.logger.setLevel(logging.INFO)
 
-fmt= logging.Formatter("%(asctime)s - %(name)s -%(levelbame)s -%(message)s","%Y-%m%dT%H;%M:%S")
+fmt= logging.Formatter("%(asctime)s - %(name)s -%(levelname)s -%(message)s","%Y-%m-%dT%H:%M:%S")
 
 streamHandler = logging.StreamHandler(fmt)
 streamHandler.setLevel(logging.INFO)
