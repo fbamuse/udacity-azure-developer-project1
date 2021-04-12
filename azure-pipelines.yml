@@ -46,7 +46,7 @@ steps:
   inputs:
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
-    commandOptions: '-var subscription_id=$(subscription_id ) -var client_id=$(client_id) -var client_secret=$(client_secret) -var tenant_id=$(tenant_id)'
+    commandOptions: '-var 'subscription_id=$(subscription_id)' -var 'client_id=$(client_id)' -var 'client_secret=$(client_secret)' -var 'tenant_id=$(tenant_id)''
     environmentServiceName: '従量課金(121a3543-1cf4-4852-8b13-d230af5db949)'
     allowTelemetryCollection: true
 
