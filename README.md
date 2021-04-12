@@ -10,7 +10,14 @@ This project is a Python web application built using Flask. The user can log in 
 Or, once the MS Login button is implemented, it will automatically log into the `admin` account.
 
 ## Project Instructions (For Student)
+![](2021-04-12-11-09-59.png)
+A screenshot of the resource group from the Azure Portal including all of the resources that were created to complete this project. 
+![](2021-04-12-11-11-33.png)
 
+![](2021-04-12-11-16-35.png)
+
+![](2021-04-12-11-20-11.png)
+![](2021-04-12-11-26-33.png)
 You are expected to do the following to complete this project:
 1. Create a Resource Group in Azure.
 2. Create an SQL Database in Azure that contains a user table, an article table, and data in each table (populated with the scripts provided in the SQL Scripts folder).
