@@ -1,4 +1,8 @@
 # Article CMS (FlaskWebProject)
+https://dev.azure.com/uda-azure-developer/project1/_apis/build/status/fbamuse.udacity-azure-developer-project1?branchName=main
+
+[![Build Status](https://dev.azure.com/uda-azure-developer/project1/_apis/build/status/fbamuse.udacity-azure-developer-project1?branchName=main)](https://dev.azure.com/uda-azure-developer/project1/_build/latest?definitionId=1&branchName=main)
+
 
 This project is a Python web application built using Flask. The user can log in and out and create/edit articles. An article consists of a title, author, and body of text stored in an Azure SQL Server along with an image that is stored in Azure Blob Storage. You will also implement OAuth2 with Sign in with Microsoft using the `msal` library, along with app logging.
 
@@ -18,6 +22,8 @@ A screenshot of the resource group from the Azure Portal including all of the re
 
 ![](2021-04-12-11-20-11.png)
 ![](2021-04-12-11-26-33.png)
+
+![](2021-04-12-20-11-48.png)
 You are expected to do the following to complete this project:
 1. Create a Resource Group in Azure.
 2. Create an SQL Database in Azure that contains a user table, an article table, and data in each table (populated with the scripts provided in the SQL Scripts folder).
