@@ -10,7 +10,8 @@ This project is a Python web application built using Flask. The user can log in 
 This folder contains sample screenshots that students are required to submit in order to prove they completed various tasks throughout the project.
 
 1. article-cms-solution.png is a screenshot from running the FlaskWebProject on Azure and prove that the student was able to create a new entry. The Title, Author, and Body fields must be populated to prove that the data is being retrieved from the Azure SQL Database while the image on the right proves that an image was uploaded and pulled from Azure Blob Storage.
-![](images/images/2021-04-12-11-09-59.png)
+![](images/2021-04-13-08-19-15.png)
+
 1. azure-portal-resource-group.png is a screenshot from the Azure Portal showing all of the contents of the Resource Group the student needs to create. The resource group must 
 ![](images/2021-04-12-11-11-33.png)
 3. sql-storage-solution.png is a screenshot showing the created tables and one query of data from the initial scripts.
