@@ -42,12 +42,12 @@ module "sqlserver" {
   sqldbname        = "${var.sqldbname}" 
   sqlsvrname       = "${var.sqlsvrname}" 
 }
-module "monitor_diag" {
-  source           =  "../../modules/monitor_diag"
-  resource_group   =  "${module.resource_group.resource_group_name}"
-  app_service      =  "${var.app_service}" 
-  saname           =  "${var.saname}" 
-  depends_on = [
-    module.appservice
-  ]
-}
+#module "monitor_diag" {
+#  source           =  "../../modules/monitor_diag"
+#  resource_group   =  "${module.resource_group.resource_group_name}"
+#  app_service      =  "${var.app_service}" 
+#  saname           =  "${var.saname}" 
+#  depends_on = [
+#    module.appservice
+#  ]
+#}
