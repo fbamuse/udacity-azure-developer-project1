@@ -12,7 +12,9 @@ app = Flask(__name__)
 app.config.from_object(Config)
 app.logger.setLevel(logging.INFO)
 
-streamHandler = logging.StreamHandler()
+fmt= logging.Formatter("%(asctime)s - %(name)s -%(levelbame)s -%(message)s","%Y-%m%dT%H;%M:%S")
+
+streamHandler = logging.StreamHandler(fmt)
 streamHandler.setLevel(logging.INFO)
 app.logger.addHandler(streamHandler)
 # TODO: Add any logging levels and handlers with app.logger
